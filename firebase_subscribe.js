@@ -1,12 +1,10 @@
 firebase.initializeApp({
     messagingSenderId: '47806732700'
 });
-
+var messaging = firebase.messaging();
 
 $(window).load(function() {
     if ('Notification' in window) {
-        var messaging = firebase.messaging();
-    
         // пользователь уже разрешил получение уведомлений
         // подписываем на уведомления если ещё не подписали
         if (Notification.permission === 'granted') {
