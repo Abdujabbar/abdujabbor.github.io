@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="favicon.ico" type="image/png" />
+	<link href="https://fonts.googleapis.com/css?family=Reem+Kufi|Roboto:300" rel="stylesheet">
+	<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/themes/white-grey.css">
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyBc6L_ncKnoWeZJ6Pg5l4zjoI1vi6tPBio",
+        authDomain: "web-push-sample-18d6f.firebaseapp.com",
+        databaseURL: "https://web-push-sample-18d6f.firebaseio.com",
+        projectId: "web-push-sample-18d6f",
+        storageBucket: "web-push-sample-18d6f.appspot.com",
+        messagingSenderId: "47806732700"
+    };
+    firebase.initializeApp(config);
+    </script>
+    <script type="text/javascript" src="//www.gstatic.com/firebasejs/3.6.8/firebase.js"></script>
+    <script type="text/javascript" src="/firebase_subscribe.js"></script>
+
+</head>
+<body>
+	<main>
+        This is web push testing sample: <button type="button" id="subscribe">Следить за изменениями</button>
+	</main>
+</body>
+</html>
