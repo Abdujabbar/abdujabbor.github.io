@@ -5,14 +5,9 @@ var messaging = firebase.messaging();
 
 $(window).load(function() {
     if ('Notification' in window) {
-        // пользователь уже разрешил получение уведомлений
-        // подписываем на уведомления если ещё не подписали
         if (Notification.permission === 'granted') {
             subscribe();
         }
-    
-        // по клику, запрашиваем у пользователя разрешение на уведомления
-        // и подписываем его
         $('#subscribe').on('click', function () {
             subscribe();
         });
@@ -21,10 +16,8 @@ $(window).load(function() {
 
 
 function subscribe() {
-    // запрашиваем разрешение на получение уведомлений
     messaging.requestPermission()
         .then(function () {
-            // получаем ID устройства
             messaging.getToken()
                 .then(function (currentToken) {
                     console.log(currentToken);
@@ -32,12 +25,12 @@ function subscribe() {
                     if (currentToken) {
                         sendTokenToServer(currentToken);
                     } else {
-                        console.warn('Не удалось получить токен.');
+                        console.warn('Can\'t receive token from firebase.');
                         setTokenSentToServer(false);
                     }
                 })
                 .catch(function (err) {
-                    console.warn('При получении токена произошла ошибка.', err);
+                    console.warn('Error while receive token.', err);
                     setTokenSentToServer(false);
                 });
     })
@@ -46,24 +39,23 @@ function subscribe() {
     });
 }
 
-// отправка ID на сервер
+// sending ID own to server
 function sendTokenToServer(currentToken) {
     if (!isTokenSentToServer(currentToken)) {
-        console.log('Отправка токена на сервер...');
+        console.log('Sending token to own server...');
 
-        var url = ''; // адрес скрипта на сервере который сохраняет ID устройства
+        var url = '';
         $.post(url, {
             token: currentToken
         });
 
         setTokenSentToServer(currentToken);
     } else {
-        console.log('Токен уже отправлен на сервер.');
+        console.log('Token already sent to server.');
     }
 }
 
-// используем localStorage для отметки того,
-// что пользователь уже подписался на уведомления
+//storing in local storage
 function isTokenSentToServer(currentToken) {
     return window.localStorage.getItem('sentFirebaseMessagingToken') == currentToken;
 }
